@@ -1,30 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var bigNum = document.createElement("DIV")
-  bigNum.className = "big-num";
-
-  var daysQuerysElement = bigNum.cloneNode(true)
-  var lifetimeQuerysElement = bigNum.cloneNode(true)
-  var querysPerDayElement = bigNum.cloneNode(true)
-
-
   chrome.storage.sync.get("queryosity", function(data) {
     const storage = data.queryosity
-    daysQuerysElement.innerHTML = storage.todaysSearches.length;
-    lifetimeQuerysElement.innerHTML = storage.lifetimeSearchesTotal
-    querysPerDayElement.innerHTML = qpd(storage)
+    const todaysQuerys = storage.todaysSearches.length;
+    const lifetimeQuerys = storage.lifetimeSearchesTotal
+    const personalBest = storage.oneDaySearchRecord
+
+    const querysPerDay = qpd(storage)
+    const daysSearching = calcDaysSearching(storage)
+
+    document.getElementById('querys-per-day-number').innerHTML = (querysPerDay)
+
+    document.getElementById('lifetime-querys-number').innerHTML = lifetimeQuerys
+    document.getElementById('todays-querys-number').innerHTML = todaysQuerys
+    document.getElementById('days-searching-number').innerHTML = daysSearching
+    document.getElementById('personal-best-number').innerHTML = personalBest
+
+    document.getElementById('x-button').addEventListener("click", function(){
+      window.close()
+    })
 
   })
 
-  document.getElementById('todays-querys-number').appendChild(daysQuerysElement)
-  document.getElementById('lifetime-querys-number').appendChild(lifetimeQuerysElement)
-  document.getElementById('perday-querys-number').appendChild(querysPerDayElement)
-
-
-  //document.getElementById('get-search-btn').addEventListener("click", getSyncStorage)
-  document.getElementById('clear-search-btn').addEventListener("click", clearSyncStorage)
-  document.getElementById("download-report").addEventListener("click", DownloadSearchesReport)
+  // document.getElementById('get-search-btn').addEventListener("click", getSyncStorage)
+  // document.getElementById('clear-search-btn').addEventListener("click", clearSyncStorage)
+  // document.getElementById("download-report").addEventListener("click", DownloadSearchesReport)
 
 })
+function calcDaysSearching(data){
+  const firstSearchDate = new Date(data.firstSearch.date).getTime()
+  const today = new Date().getTime()
+
+  const msPerDay = 1000 * 60 * 60 * 24
+
+  const daysSearching =  Math.ceil((today - firstSearchDate) / msPerDay)
+
+  return daysSearching
+}
 
 function qpd(data){
   const firstSearchDate = new Date(data.firstSearch.date).getTime()
@@ -36,9 +47,6 @@ function qpd(data){
   const qpdAverage = data.lifetimeSearchesTotal / daysSearching
 
   return Math.round(qpdAverage);
-
-
-
 }
 
 function calcQuerysToday(searches){
@@ -92,7 +100,7 @@ function clearSyncStorage(){
 }
 
 function getSyncStorage(){
-  chrome.storage.sync.get("searches", function(data) {console.log(data.searches)})
+  chrome.storage.sync.get("queryosity", function(data) {console.log(data.queryosity)})
 
 }
 

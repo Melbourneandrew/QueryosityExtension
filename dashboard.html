@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="dashboard.css">
-    <script src="dashboard.js" charset="utf-8"></script>
-    <title>Search Engine Querys Dashboard</title>
-  </head>
-  <body>
-    <button type="button" name="button" id="get-search-btn">Get Searches</button>
-    <button type="button" name="anotherbtn" id="clear-search-btn">Clear Sync Storage</button>
-    <h1>Search Engine Querys</h1>
-    <div>
-      <div class="popup-title" id="todays-querys">Todays Querys:</div>
-      <div class="popup-title" id="todays-querys-number"></div>
-      <div class="popup-title" id="lifetime-querys">Lifetime Querys:</div>
-      <div class="popup-title" id="lifetime-querys-number"></div>
-      <div class="popup-title" id="querys-per-day">Querys Per Day:</div>
-      <div class="popup-title" id="perday-querys-number"></div>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="dashboard.js" charset="utf-8"></script>
+  <title>Search Engine Querys Dashboard</title>
+</head>
+
+<body scroll="no">
+  <!-- <button type="button" name="button" id="get-search-btn">Get Searches</button> -->
+  <!-- <button type="button" name="anotherbtn" id="clear-search-btn">Clear Sync Storage</button> -->
+  <div class="header">
+    <div class="window-title">Queryosity</div>
+    <div id="x-button"><svg viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1" y1="7" x2="7" y2="1" stroke="#FFD700" stroke-width="1" />
+        <line x1="1" y1="1" x2="7" y2="7" stroke="#FFD700" stroke-width="1" />
+      </svg></div>
+  </div>
+  <div class="qpd-num-box">
+    Avg. Querys Per Day
+    <div class="big-num" id="querys-per-day-number"></div>
+  </div>
+
+  <div class="stats-table">
+    <div class="stats-cell">
+      Lifetime Querys
+      <div class="little-num" id="lifetime-querys-number"></div>
     </div>
-    <button type="button" id="download-report">Print Report</button>
-  </body>
+    <div class="stats-cell">
+      Todays Querys
+      <div class="little-num" id="todays-querys-number"></div>
+    </div>
+    <div class="stats-cell">
+      Days Searching
+      <div class="little-num" id="days-searching-number"></div>
+    </div>
+    <div class="stats-cell">
+      Personal Best
+      <div class="little-num" id="personal-best-number"></div>
+    </div>
+  </div>
+
+  <!-- <div class="popup-title" id="todays-querys">Todays Querys:</div>
+  <div class="popup-title" id="todays-querys-number"></div>
+  <div class="popup-title" id="lifetime-querys">Lifetime Querys:</div>
+  <div class="popup-title" id="lifetime-querys-number"></div> -->
+  <!-- <button type="button" id="download-report">Print Report</button> -->
+</body>
+
 </html>
