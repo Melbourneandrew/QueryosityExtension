@@ -1,5 +1,5 @@
-### How Queryious are you?###
-## Find out with queryosity!##
+### How Queryious are you?
+## Find out with queryosity!
 
 Queryosity is an extension I made because I noticed I took a weird pride in how many google querys I was making per day. The extension also counts querys made with other search engines. Currently supports Google, Yahoo, Bing, DuckDuckGo, and Baidu.
 
