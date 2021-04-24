@@ -1,11 +1,33 @@
 /*
-Filter for chrome.webNavigation.onCompleted.addListener
-only triggers on google searches
+  The background script only runs once when the extension is installed.
+
+  Here I set up an event listner to check when a web navigation is made to one of the URL's
+  specified in the 'filter' object below.
+
+  The .onComitted method passes a details object to the callback function that includes
+  information about the navigation. If the details object reveals that the webnav happened
+  because of a reload, that navigation wont be counted as a search in the extension.
 */
+
+
+//Filter for chrome.webNavigation.onCompleted.addListener
 const filter = {
   url: [{
-    urlContains: "google.com/search?"
-  }]
+      urlContains: "google.com/search"
+    },
+    {
+      urlContains: "yahoo.com/search"
+    },
+    {
+      urlContains: "duckduckgo.com/?q"
+    },
+    {
+      urlContains: "bing.com/search"
+    },
+    {
+      urlContains: "//www.baidu.com/s?"
+    }
+  ]
 }
 
 /*
@@ -27,7 +49,10 @@ function sendMessageToContentScript(details) {
       timeStamp: details.timeStamp
     }
     //console.log(details.transitionType)
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    chrome.tabs.query({
+      active: true,
+      currentWindow: true
+    }, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
 
         if (chrome.runtime.lastError) {
@@ -44,19 +69,3 @@ function sendMessageToContentScript(details) {
     })
   }
 }
-
-// ################# CODE DUMP ########################
-// function navCompleted(details) {
-//   var searches = {};
-//   console.log(`onCompleted: ${details.url}`);
-//   chrome.storage.sync.get(["searches"], function(data){data ? searches = data: null});
-//
-//   searches.test = "Back from the void " + details;
-//
-//   chrome.storage.sync.set({ "searches" : searches }, function() {
-//     if (chrome.runtime.error) {
-//       console.log("Runtime error.");
-//     }
-//   });
-//
-// }

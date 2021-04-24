@@ -10,45 +10,43 @@ Complements:
 
 #726d81
 */
-html{
-  width:400px;
-  height:600px;
+html {
+  width: 400px;
+  height: 600px;
   overflow: hidden;
 }
-body{
 
+body {
   background-color: #007575;
-
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-rows: 60px 300px 200px;
+  grid-template-rows: 60px 280px 200px;
 }
 
-.header{
+.header {
   height: 50px;
   display: grid;
   grid-template-columns: 340px 50px;
 }
 
-#x-button{
+#x-button {
   padding-top: 10px;
 }
 
-#x-button:hover{
+#x-button:hover {
   opacity: 50%;
 }
 
-.window-title{
+.window-title {
   color: #FFD700;
   font-size: 33px;
   /* font-weight: bold; */
   letter-spacing: 4px;
   padding-left: 99px;
   padding-top: 10px;
-  width:fit-content;
-  height:fit-content;
-
+  width: fit-content;
+  height: fit-content;
 }
 
 /* .popup-title{
@@ -56,66 +54,56 @@ body{
   font-weight: bold;
   margin: auto;
 } */
-
-.qpd-num-box{
-  width: 200px;
-  height: 215px;
+.qpd-num-box {
+  width: 240px;
+  height: 180px;
   padding-top: 8px;
-
   background-color: #007777;
-
   display: grid;
   justify-items: center;
   text-align: center;
   grid-template-rows: 20px auto;
-
   box-shadow: -7px 7px 20px 5px #005252;
-
   border-radius: 8px;
-
   color: #FFD700;
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-
 }
 
-.big-num{
+.big-num {
   /* margin-left: auto; */
   font-weight: bold;
   margin: auto;
-
+  margin-top: 18px;
   color: #FFD700;
   background-color: inherit;
   text-align: center;
-  font-size: 125px;
+  font-size: 100px;
   /* text-shadow: -2px 2px #000000; */
 }
 
-.little-num{
+.little-num {
   font-weight: bold;
   margin: auto;
   color: #FFD700;
   font-size: 35px;
-
 }
 
-.stats-table{
+.stats-table {
   display: grid;
   grid-template-columns: auto auto;
 }
 
-.stats-cell{
+.stats-cell {
   box-shadow: -7px 7px 20px 5px #005252;
   width: 120px;
   padding: 8px;
   margin: 10px;
   /* border: 2px solid #007070; */
-
   display: inline-block;
   white-space: nowrap;
   border-radius: 8px;
-
   color: #FFD700;
   text-align: center;
   font-size: 15px;
