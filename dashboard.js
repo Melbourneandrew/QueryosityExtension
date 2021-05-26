@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
   chrome.storage.sync.get("queryosity", function(data) {
     const storage = data.queryosity
 
-    const todaysQuerys = storage.todaysSearches.length;
+    const todaysQuerys = storage.todaysSearches.count;
     const lifetimeQuerys = storage.lifetimeSearchesTotal
     const personalBest = storage.oneDaySearchRecord
 

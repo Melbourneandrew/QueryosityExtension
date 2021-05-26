@@ -25,7 +25,7 @@ const filter = {
       urlContains: "bing.com/search"
     },
     {
-      urlContains: "//www.baidu.com/s?"
+      urlContains: "baidu.com/s?"
     }
   ]
 }
