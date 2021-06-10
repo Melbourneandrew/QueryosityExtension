@@ -58,7 +58,7 @@ function syncSaveSearch(timeStamp){
       //for when extension is first installed.
       if(!data.lifetimeSearchesTotal) data.lifetimeSearchesTotal = 0
       //date of the last day searches were entered
-      const lastTodaysSearchesDate = new Date(data.todaysSearches.firstSearch.date)
+      const previousFirstSearchOfDay = new Date(data.todaysSearches.firstSearch.date)
 
       //todays date generated from the date of the search being processed
       const todaysDate = new Date(date)
@@ -68,10 +68,10 @@ function syncSaveSearch(timeStamp){
       the most recent search was entered, it is a new day and the days
       search total needs to be reset
       */
-      if(lastTodaysSearchesDate.getDate() != todaysDate.getDate()){
-        //clear array if search is happening in a new day
+      if(previousFirstSearchOfDay.getDate() != todaysDate.getDate()){
+        //ad new first search of the day
         data.todaysSearches.firstSearch = {date:date}
-
+        //reset days searches to 0 if search is happening in a new day
         data.todaysSearches.count = 0;
       }
 
