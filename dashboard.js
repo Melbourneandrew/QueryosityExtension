@@ -20,14 +20,19 @@ the extension has been used.
 */
 
 document.addEventListener('DOMContentLoaded', function() {
+  //give x button functionality
+  document.getElementById('x-button').addEventListener("click", function() {
+    window.close()
+  })
 
   //fetch sync data
   chrome.storage.sync.get("queryosity", function(data) {
-    const storage = data.queryosity
+    const storage = data.queryosity;
+    if(storage === undefined) return;
 
     const todaysQuerys = storage.todaysSearches.count;
-    const lifetimeQuerys = storage.lifetimeSearchesTotal
-    const personalBest = storage.oneDaySearchRecord
+    const lifetimeQuerys = storage.lifetimeSearchesTotal;
+    const personalBest = storage.oneDaySearchRecord;
 
     const querysPerDay = qpd(storage)
     const daysSearching = calcDaysSearching(storage)
@@ -39,9 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('days-searching-number').innerHTML = daysSearching
     document.getElementById('personal-best-number').innerHTML = personalBest
 
-    document.getElementById('x-button').addEventListener("click", function() {
-      window.close()
-    })
 
   })
 

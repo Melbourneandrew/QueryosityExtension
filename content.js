@@ -33,30 +33,23 @@ function syncSaveSearch(timeStamp){
   chrome.storage.sync.get("queryosity", function(items){
     if (!chrome.runtime.lastError){
       // console.log(items)
-      var data
-      if(!items.queryosity){
-        chrome.storage.sync.set({queryosity: {initalized:"initalized"}}, function() {
-          //console.log("Saving to sync storage...")
-          if (chrome.runtime.lastError) console.log("Could not initalize'queryosity' in sync storage")
+      var data = {}
+
+      /*
+      When the extension is first installed, there will be nothing in sync storage. The object
+      containing user search habit data must be initalized and set in sync storage
+      */
+      if(items.queryosity === undefined){
+        data = initalizeSyncStorage(date);
+        chrome.storage.sync.set({queryosity: data}, function() {
+          console.log("Initalizing sync storage...")
+          if (chrome.runtime.lastError) console.log("Could not initalize 'queryosity' in sync storage")
         })
-      }else{
-          data = items.queryosity
+        return;
       }
 
+      data = items.queryosity;
 
-      //if a first search has not been logged, log one.
-      if(!data.firstSearch) data.firstSearch = {date:date, first:"First search logged!"}
-      //for when extension is first installed.
-      if(!data.todaysSearches){
-        data.todaysSearches = {
-          firstSearch: "",
-          count: 0,
-        }
-      }
-      //for when extension is first installed.
-      if(!data.oneDaySearchRecord) data.oneDaySearchRecord = 0
-      //for when extension is first installed.
-      if(!data.lifetimeSearchesTotal) data.lifetimeSearchesTotal = 0
       //date of the last day searches were entered
       const previousFirstSearchOfDay = new Date(data.todaysSearches.firstSearch.date)
 
@@ -69,6 +62,7 @@ function syncSaveSearch(timeStamp){
       search total needs to be reset
       */
       if(previousFirstSearchOfDay.getDate() != todaysDate.getDate()){
+        console.log("First search of the day!")
         //ad new first search of the day
         data.todaysSearches.firstSearch = {date:date}
         //reset days searches to 0 if search is happening in a new day
@@ -96,4 +90,23 @@ function syncSaveSearch(timeStamp){
     }
 
   })
+}
+
+function initalizeSyncStorage(date){
+  var data = {}
+  //if a first search has not been logged, log one.
+  if(data.firstSearch === undefined) data.firstSearch = {date:date, first:"First search logged!"}
+  //for when extension is first installed.
+  if(data.todaysSearches === undefined){
+    data.todaysSearches = {
+      firstSearch: {date:date},
+      count: 1,
+    }
+  }
+  //for when extension is first installed.
+  if(data.oneDaySearchRecord === undefined) data.oneDaySearchRecord = 1
+  //for when extension is first installed.
+  if(data.lifetimeSearchesTotal === undefined) data.lifetimeSearchesTotal = 1
+
+  return data;
 }
