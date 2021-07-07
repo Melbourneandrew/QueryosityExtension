@@ -5,4 +5,6 @@ Queryosity is an extension I made because I noticed I took a weird pride in how 
 
 Nothing pertaining to the content of a search is stored, only the date and time is logged to protect user privacy.
 
+[Install on chrome app store!](https://chrome.google.com/webstore/detail/queryosity/oaifnibonihfadgmfclgknlmnfdfoemb)
+
 ![Image failed to load](https://github.com/Melbourneandrew/QueryosityExtension/blob/master/demo-image.png?raw=true)
